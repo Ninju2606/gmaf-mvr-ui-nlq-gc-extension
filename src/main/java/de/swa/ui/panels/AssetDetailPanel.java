@@ -89,6 +89,9 @@ public class AssetDetailPanel extends JPanel {
 						Configuration.getInstance().showBoundingBox());
 				JLabel l = new JLabel(new ImageIcon(i));
 				p.add(l);
+			} else 	if (extension.equals("mp4")) {
+				JLabel l = new JLabel("Video");
+				p.add(l);
 			} else {
 				try {
 					RandomAccessFile rf = new RandomAccessFile(f, "r");
@@ -107,7 +110,7 @@ public class AssetDetailPanel extends JPanel {
 						String prettyJson = gson.toJson(json);
 						prettyFormat = prettyJson;
 					} catch (Exception ex) {
-
+						System.out.println("Tried to parse file " + f.getName() + ": " + ex.getMessage());
 					}
 
 					JEditorPane ep = new JEditorPane();
