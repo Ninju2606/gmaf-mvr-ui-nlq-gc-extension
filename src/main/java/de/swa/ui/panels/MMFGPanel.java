@@ -79,6 +79,9 @@ public class MMFGPanel extends JPanel implements ActionListener {
 		else if (ext.equalsIgnoreCase(".txt")) {
 			newimg = new ImageIcon("resources/document_text.png").getImage();
 		}
+		else if (ext.equalsIgnoreCase(".mp4")) {
+			newimg = new ImageIcon("resources/document_attachment.png").getImage();
+		}
 		else {
 			ImageIcon icon = new ImageIcon(f.getAbsolutePath());
 			newimg = Tools.getScaledInstance(f.getName(), icon.getImage(), 120, false);
