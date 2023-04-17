@@ -90,7 +90,7 @@ public class AssetDetailPanel extends JPanel {
 				JLabel l = new JLabel(new ImageIcon(i));
 				p.add(l);
 			} else 	if (extension.equals("mp4")) {
-				JLabel l = new JLabel("Video");
+				JLabel l = new JLabel("Video Preview not supported yet");
 				p.add(l);
 			} else {
 				try {
