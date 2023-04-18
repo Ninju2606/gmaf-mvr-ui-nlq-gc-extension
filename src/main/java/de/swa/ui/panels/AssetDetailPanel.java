@@ -1,29 +1,9 @@
 package de.swa.ui.panels;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.RandomAccessFile;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JEditorPane;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.table.JTableHeader;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import de.swa.fuh.explanation.InfoButton;
 import de.swa.gc.GraphCode;
 import de.swa.gc.GraphCodeCollection;
@@ -31,15 +11,33 @@ import de.swa.gc.GraphCodeGenerator;
 import de.swa.gc.SemanticGraphCode;
 import de.swa.gmaf.GMAF;
 import de.swa.mmfg.MMFG;
-import de.swa.ui.GraphCodeRenderer;
-import de.swa.ui.GraphCodeTableModel;
-import de.swa.ui.MMFGCollection;
-import de.swa.ui.Tools;
-import de.swa.ui.Configuration;
+import de.swa.ui.*;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.stage.Screen;
 
-/** panel that shows asset details **/
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.table.JTableHeader;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.RandomAccessFile;
+
+/**
+ * panel that shows asset details
+ **/
 public class AssetDetailPanel extends JPanel {
+	private static AssetDetailPanel instance;
 	private boolean inMemoryOnly = false;
+	private File f;
+	private GraphCode gc;
+	private MediaPlayer player = null;
 
 	public AssetDetailPanel(boolean inMemory) {
 		inMemoryOnly = inMemory;
@@ -52,22 +50,22 @@ public class AssetDetailPanel extends JPanel {
 		refresh();
 	}
 
+	public static AssetDetailPanel getCurrentInstance() {
+		return instance;
+	}
+
 	public void refresh() {
 		setVisible(false);
+		if (player != null) {
+			System.out.println("dispose player");
+			player.dispose();
+		}
 		removeAll();
 		setLayout(new GridLayout(2, 1));
 		add(getAssetPanel());
 		add(getGraphCodePanel());
 		setVisible(true);
 	}
-
-	private static AssetDetailPanel instance;
-
-	public static AssetDetailPanel getCurrentInstance() {
-		return instance;
-	}
-
-	private File f;
 
 	private JPanel getAssetPanel() {
 		JPanel p = new JPanel();
@@ -89,9 +87,67 @@ public class AssetDetailPanel extends JPanel {
 						Configuration.getInstance().showBoundingBox());
 				JLabel l = new JLabel(new ImageIcon(i));
 				p.add(l);
-			} else 	if (extension.equals("mp4")) {
-				JLabel l = new JLabel("Video Preview not supported yet");
-				p.add(l);
+			} else if (extension.equals("mp4")) {
+
+
+				try {
+
+					Platform.setImplicitExit(false);
+					JFXPanel videoPanel = new JFXPanel();
+
+					final JFXPanel VFXPanel = new JFXPanel();
+
+					File video_source = f;
+					String filename = video_source.toURI().toString();
+					System.out.println(filename);
+					javafx.scene.media.Media m = new javafx.scene.media.Media(filename);
+
+					player = new MediaPlayer(m);
+					
+
+					MediaView viewer = new MediaView(player);
+					
+
+
+
+					StackPane root = new StackPane();
+					Scene scene = new Scene(root);
+
+					MediaControl mediaControl = new MediaControl(player);
+
+					scene.setRoot(mediaControl);
+
+					// add video to stackpane
+					videoPanel.setScene(scene);
+					mediaControl.setMaxHeight(400);
+					mediaControl.setMaxWidth(700);
+
+					// center video position
+					javafx.geometry.Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+					//viewer.setX((screen.getWidth() - p.getWidth()) / 2);
+					//viewer.setY((screen.getHeight() - p.getHeight()) / 2);
+
+//				// resize video based on screen size
+//				DoubleProperty width = viewer.fitWidthProperty();
+//				DoubleProperty height = viewer.fitHeightProperty();
+//				width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
+//				height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
+					viewer.setPreserveRatio(true);
+
+					// add video to stackpane
+					root.getChildren().add(viewer);
+
+					VFXPanel.setScene(scene);
+					//player.play();
+					videoPanel.setLayout(new BorderLayout());
+					videoPanel.add(VFXPanel, BorderLayout.CENTER);
+					p.add(videoPanel);
+				} catch (Exception e) {
+					e.printStackTrace();
+					JLabel l = new JLabel("Video Preview not supported yet");
+					p.add(l);
+
+				}
 			} else {
 				try {
 					RandomAccessFile rf = new RandomAccessFile(f, "r");
@@ -129,8 +185,6 @@ public class AssetDetailPanel extends JPanel {
 		q.add(l, "North");
 		return q;
 	}
-
-	private GraphCode gc;
 
 	public GraphCode getGraphCode() {
 		return gc;
