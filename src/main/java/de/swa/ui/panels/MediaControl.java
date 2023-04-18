@@ -43,6 +43,10 @@ class MediaControl extends BorderPane {
 		mediaBar.setPadding(new Insets(5, 10, 5, 10));
 		BorderPane.setAlignment(mediaBar, Pos.CENTER);
 
+		if (mp.getStatus() == Status.READY) {
+			duration = mp.getMedia().getDuration();
+		}
+
 		final Button playButton = new Button(">");
 
 		playButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -93,6 +97,7 @@ class MediaControl extends BorderPane {
 		mp.setOnReady(new Runnable() {
 			public void run() {
 				duration = mp.getMedia().getDuration();
+				System.out.println("Duration: " + duration);
 				updateValues();
 			}
 		});

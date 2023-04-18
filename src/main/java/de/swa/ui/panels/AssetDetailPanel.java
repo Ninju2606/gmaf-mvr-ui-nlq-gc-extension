@@ -37,7 +37,6 @@ public class AssetDetailPanel extends JPanel {
 	private boolean inMemoryOnly = false;
 	private File f;
 	private GraphCode gc;
-	private MediaPlayer player = null;
 
 	public AssetDetailPanel(boolean inMemory) {
 		inMemoryOnly = inMemory;
@@ -56,10 +55,6 @@ public class AssetDetailPanel extends JPanel {
 
 	public void refresh() {
 		setVisible(false);
-		if (player != null) {
-			System.out.println("dispose player");
-			player.dispose();
-		}
 		removeAll();
 		setLayout(new GridLayout(2, 1));
 		add(getAssetPanel());
@@ -89,7 +84,6 @@ public class AssetDetailPanel extends JPanel {
 				p.add(l);
 			} else if (extension.equals("mp4")) {
 
-
 				try {
 
 					Platform.setImplicitExit(false);
@@ -102,18 +96,16 @@ public class AssetDetailPanel extends JPanel {
 					System.out.println(filename);
 					javafx.scene.media.Media m = new javafx.scene.media.Media(filename);
 
-					player = new MediaPlayer(m);
+					MediaPlayer player = new MediaPlayer(m);
 					
-
 					MediaView viewer = new MediaView(player);
-					
+
+					MediaControl mediaControl = new MediaControl(player);
 
 
 
 					StackPane root = new StackPane();
 					Scene scene = new Scene(root);
-
-					MediaControl mediaControl = new MediaControl(player);
 
 					scene.setRoot(mediaControl);
 
@@ -122,29 +114,19 @@ public class AssetDetailPanel extends JPanel {
 					mediaControl.setMaxHeight(400);
 					mediaControl.setMaxWidth(700);
 
-					// center video position
-					javafx.geometry.Rectangle2D screen = Screen.getPrimary().getVisualBounds();
-					//viewer.setX((screen.getWidth() - p.getWidth()) / 2);
-					//viewer.setY((screen.getHeight() - p.getHeight()) / 2);
-
-//				// resize video based on screen size
-//				DoubleProperty width = viewer.fitWidthProperty();
-//				DoubleProperty height = viewer.fitHeightProperty();
-//				width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
-//				height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
 					viewer.setPreserveRatio(true);
 
 					// add video to stackpane
 					root.getChildren().add(viewer);
 
 					VFXPanel.setScene(scene);
-					//player.play();
+
 					videoPanel.setLayout(new BorderLayout());
 					videoPanel.add(VFXPanel, BorderLayout.CENTER);
 					p.add(videoPanel);
 				} catch (Exception e) {
 					e.printStackTrace();
-					JLabel l = new JLabel("Video Preview not supported yet");
+					JLabel l = new JLabel("Error on video display");
 					p.add(l);
 
 				}
