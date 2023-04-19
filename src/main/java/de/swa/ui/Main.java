@@ -27,8 +27,8 @@ public class Main {
 		ProgressFrame.getInstance().setProgress(1, "initializing configuration");
 		CommandHistory.getInstance().addCommand(new ReloadCommand());
 		ProgressFrame.getInstance().setProgress(2, "loading collection");
-		MMFGCollection collection = MMFGCollection.getInstance();
-		collection.init();
+		MMFGCollection.getInstance().init();
+
 		
 		if (Configuration.getInstance().getUIMode().equals("light")) FlatLightLaf.install();
 		else FlatDarkLaf.install();
