@@ -12,6 +12,13 @@ import de.swa.gc.SemanticGraphCode;
 import de.swa.gmaf.GMAF;
 import de.swa.mmfg.MMFG;
 import de.swa.ui.*;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.stage.Screen;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -30,6 +37,7 @@ public class AssetDetailPanel extends JPanel {
 	private boolean inMemoryOnly = false;
 	private File f;
 	private GraphCode gc;
+	private MediaPlayer player = null;
 
 	public AssetDetailPanel(boolean inMemory) {
 		inMemoryOnly = inMemory;
@@ -75,6 +83,67 @@ public class AssetDetailPanel extends JPanel {
 						Configuration.getInstance().showBoundingBox());
 				JLabel l = new JLabel(new ImageIcon(i));
 				p.add(l);
+			} else if (extension.equals("mp4")) {
+
+
+				try {
+
+					Platform.setImplicitExit(false);
+					JFXPanel videoPanel = new JFXPanel();
+
+					final JFXPanel VFXPanel = new JFXPanel();
+
+					File video_source = f;
+					String filename = video_source.toURI().toString();
+					System.out.println(filename);
+					javafx.scene.media.Media m = new javafx.scene.media.Media(filename);
+
+					player = new MediaPlayer(m);
+					MediaPlayer player = new MediaPlayer(m);
+
+
+					MediaView viewer = new MediaView(player);
+
+
+					StackPane root = new StackPane();
+					Scene scene = new Scene(root);
+
+					MediaControl mediaControl = new MediaControl(player);
+
+					scene.setRoot(mediaControl);
+
+					// add video to stackpane
+					videoPanel.setScene(scene);
+					mediaControl.setMaxHeight(400);
+					mediaControl.setMaxWidth(700);
+
+					// center video position
+					javafx.geometry.Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+					//viewer.setX((screen.getWidth() - p.getWidth()) / 2);
+					//viewer.setY((screen.getHeight() - p.getHeight()) / 2);
+
+//				// resize video based on screen size
+//				DoubleProperty width = viewer.fitWidthProperty();
+//				DoubleProperty height = viewer.fitHeightProperty();
+//				width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
+//				height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
+					viewer.setPreserveRatio(true);
+
+					// add video to stackpane
+					root.getChildren().add(viewer);
+
+					VFXPanel.setScene(scene);
+					//player.play();
+
+					videoPanel.setLayout(new BorderLayout());
+					videoPanel.add(VFXPanel, BorderLayout.CENTER);
+					p.add(videoPanel);
+				} catch (Exception e) {
+					e.printStackTrace();
+					JLabel l = new JLabel("Error on video display");
+					p.add(l);
+
+				}
 			} else {
 				try {
 					RandomAccessFile rf = new RandomAccessFile(f, "r");
