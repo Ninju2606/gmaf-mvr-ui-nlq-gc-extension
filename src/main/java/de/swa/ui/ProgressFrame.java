@@ -21,8 +21,6 @@ public class ProgressFrame extends JFrame implements ProgressListener {
 		Dimension d = new Dimension();
 		d.height = 20;
 		progress.setPreferredSize(d);
-
-		progress.setSize(new Dimension(500,100));
 		progress.setValue(0);
 		message.setText("GMAF Framework loading...");
 
