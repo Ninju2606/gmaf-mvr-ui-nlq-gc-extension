@@ -32,9 +32,10 @@ public class SimilarAssetPanel extends JPanel {
 			Vector<MMFG> sim = MMFGCollection.getInstance().getSimilarAssets(gc);
 			
 			setLayout(new GridLayout(3, 3));
-			for (int i = 0; i < 9; i++) {
-				MMFGPanel mp = new MMFGPanel(sim.get(i), true);
-				add(mp);
+			for (int i = 0; i < 9 && i < sim.size(); i++) {
+					MMFGPanel mp = new MMFGPanel(sim.get(i), true);
+					add(mp);
+
 			}
 		}
 		catch (Exception x) {

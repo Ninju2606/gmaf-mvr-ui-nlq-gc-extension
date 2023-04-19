@@ -34,7 +34,8 @@ public class LoginCommand extends AbstractCommand {
 			SessionFactory.sessionId = sid;
 
 			if (sid != null) {
-				new ProgressFrame();
+				//new ProgressFrame();
+				ProgressFrame.getInstance();
 				return;
 			}
 		} catch (Exception ex) {
