@@ -36,12 +36,8 @@ public class ProgressFrame extends JFrame implements ProgressListener {
 		int y = (int) ((dimension.getHeight() - 250) / 2);
 		setLocation(x, y);
 
-
-
 		MMFGCollection.getInstance().addProgressListener(this);
 		setVisible(true);
-		
-
 	}
 
 	public static ProgressFrame getInstance() {

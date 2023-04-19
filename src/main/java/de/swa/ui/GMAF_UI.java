@@ -55,7 +55,7 @@ public class GMAF_UI extends JFrame implements ActionListener {
 		content.add(new AssetDetailPanel(), "East");
 		
 		JSplitPane sp = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-		ProgressFrame.getInstance().setProgress(98, "preparing asset list");
+		ProgressFrame.getInstance().setProgress(99, "preparing asset list");
 		sp.setLeftComponent(new JScrollPane(new AssetListPanel()));
 		sp.setRightComponent(new JScrollPane(new LogPanel()));
 		sp.setDividerLocation(780);
@@ -69,7 +69,7 @@ public class GMAF_UI extends JFrame implements ActionListener {
 //		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ProgressFrame.getInstance().close();
-		ProgressFrame.getInstance().setProgress(98, "UI finished");
+		ProgressFrame.getInstance().setProgress(100, "UI finished");
 		setVisible(true);
 		instance = this;
 	}
