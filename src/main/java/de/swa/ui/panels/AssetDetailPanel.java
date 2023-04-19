@@ -12,13 +12,6 @@ import de.swa.gc.SemanticGraphCode;
 import de.swa.gmaf.GMAF;
 import de.swa.mmfg.MMFG;
 import de.swa.ui.*;
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.stage.Screen;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -82,54 +75,6 @@ public class AssetDetailPanel extends JPanel {
 						Configuration.getInstance().showBoundingBox());
 				JLabel l = new JLabel(new ImageIcon(i));
 				p.add(l);
-			} else if (extension.equals("mp4")) {
-
-				try {
-
-					Platform.setImplicitExit(false);
-					JFXPanel videoPanel = new JFXPanel();
-
-					final JFXPanel VFXPanel = new JFXPanel();
-
-					File video_source = f;
-					String filename = video_source.toURI().toString();
-					System.out.println(filename);
-					javafx.scene.media.Media m = new javafx.scene.media.Media(filename);
-
-					MediaPlayer player = new MediaPlayer(m);
-					
-					MediaView viewer = new MediaView(player);
-
-					MediaControl mediaControl = new MediaControl(player);
-
-
-
-					StackPane root = new StackPane();
-					Scene scene = new Scene(root);
-
-					scene.setRoot(mediaControl);
-
-					// add video to stackpane
-					videoPanel.setScene(scene);
-					mediaControl.setMaxHeight(400);
-					mediaControl.setMaxWidth(700);
-
-					viewer.setPreserveRatio(true);
-
-					// add video to stackpane
-					root.getChildren().add(viewer);
-
-					VFXPanel.setScene(scene);
-
-					videoPanel.setLayout(new BorderLayout());
-					videoPanel.add(VFXPanel, BorderLayout.CENTER);
-					p.add(videoPanel);
-				} catch (Exception e) {
-					e.printStackTrace();
-					JLabel l = new JLabel("Error on video display");
-					p.add(l);
-
-				}
 			} else {
 				try {
 					RandomAccessFile rf = new RandomAccessFile(f, "r");
