@@ -22,7 +22,6 @@ public class RecommendedAssetPanel extends JPanel {
 	}
 	
 	public void refresh() {
-		setVisible(false);
 		removeAll();
 		
 		try {
@@ -40,7 +39,6 @@ public class RecommendedAssetPanel extends JPanel {
 		catch (Exception x) {
 			x.printStackTrace();
 		}
-		setVisible(true);
 	}
 	
 	public static RecommendedAssetPanel getCurrentInstance() {
