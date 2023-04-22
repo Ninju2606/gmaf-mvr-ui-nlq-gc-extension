@@ -135,25 +135,7 @@ public class AssetDetailPanel extends JPanel {
 			mmfg = MMFGCollection.getInstance().getMMFGForFile(f);
 			this.gc = MMFGCollection.getInstance().getOrGenerateGraphCode(mmfg);
 		}
-
-//		gc = new GraphCode();
-//		String[] str = new String[] {"age", "Nulliparous", "MIP", "bmi", "VDP", "APD", "blood-pressure", "Sectra type", "SNP", "version", "BI-RADS II", "Parity", "HRT use", "validity", "risk", "BI-RADS c", "HHUS", "ABUS", "tissue dens", "detec", "Par1", "SiemensV3", "SW1", "OP", "usr", "weight", "height", "sex", "prgn"};
-//		str = new String[] {"age", "Nulliparous", "MIP", "bmi", "VDP", "APD", "blood-pressure", "Sectra type", "SNP", "version", "BI-RADS II", "Parity", "HRT use", "validity", "risk", "BI-RADS c", "HHUS", "ABUS", "tissue dens", "detec", "Par1", "SiemensV3", "SW1", "OP", "usr", "weight", "height", "sex", "prgn"};
-//		int[] stv = new int[] {58, 1, 3, 29, 3, 2, 127, 4, 2, 3, 8, 2, 1, 90, 43, 2,3,2,6,1,2,3,2,64,5,3,3,22, 67,4,23,4,3,7,43,2,33,7,8,6,4,3,3,2};
-//		Vector<String> dict = new Vector<String>();
-//		for (String s : str) dict.add(s);
-//		gc.setDictionary(dict);
-//		for (int i = 0; i < str.length; i++) gc.setValue(i, i, stv[i]);
-//		for (int i = 0; i < str.length; i++) {
-//			for (int j = 0; j < str.length; j++) {
-//				if (j == i) continue;
-//				int val = (int)(Math.random() * 8);
-//				val = val - 4;
-//				if (val < 0) val = 0;
-//				gc.setValue(i, j, val);
-//			}
-//		}
-
+		
 		JTabbedPane tp = new JTabbedPane();
 		tp.addTab("Similar", new SimilarAssetPanel());
 		tp.addTab("Recommendation", new RecommendedAssetPanel());
@@ -191,6 +173,8 @@ public class AssetDetailPanel extends JPanel {
 			}
 
 		} catch (Exception x) {
+			System.out.println("Error on creating Tag Cloud");
+			x.printStackTrace();
 		}
 
 		InfoButton.getInfoButtonJTabbedPane(tp, f);
