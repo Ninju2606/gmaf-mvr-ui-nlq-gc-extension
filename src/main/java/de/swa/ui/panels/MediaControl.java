@@ -6,6 +6,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,7 +20,7 @@ import javafx.util.Duration;
 
 class MediaControl extends BorderPane {
 	private MediaPlayer mp;
-	private MediaView mediaView;
+	public MediaView mediaView;
 	private final boolean repeat = false;
 	private boolean stopRequested = false;
 	private boolean atEndOfMedia = false;
@@ -34,7 +35,10 @@ class MediaControl extends BorderPane {
 		setStyle("-fx-background-color: #bfc2c7;");
 		mediaView = new MediaView(mp);
 		Pane mvPane = new Pane() {
+
 		};
+		mediaView.setPreserveRatio(true);
+		mediaView.setSmooth(true);
 		mvPane.getChildren().add(mediaView);
 		mvPane.setStyle("-fx-background-color: black;");
 		setCenter(mvPane);
@@ -102,6 +106,8 @@ class MediaControl extends BorderPane {
 			}
 		});
 
+
+
 		mp.setCycleCount(repeat ? MediaPlayer.INDEFINITE : 1);
 		mp.setOnEndOfMedia(new Runnable() {
 			public void run() {
@@ -162,6 +168,11 @@ class MediaControl extends BorderPane {
 		});
 		mediaBar.getChildren().add(volumeSlider);
 		setBottom(mediaBar);
+
+
+
+
+
 	}
 
 	protected void updateValues() {

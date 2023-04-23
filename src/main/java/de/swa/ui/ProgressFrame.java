@@ -7,7 +7,7 @@ import java.awt.*;
  * progress frame indicating the processing status at startup of the GMAF
  **/
 public class ProgressFrame extends JFrame implements ProgressListener {
-	private static ProgressFrame instance;
+	private static ProgressFrame instance = null;
 	private JProgressBar progress = new JProgressBar();
 	private JLabel message = new JLabel("starting GMAF application");
 

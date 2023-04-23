@@ -15,10 +15,10 @@ import de.swa.ui.*;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.stage.Screen;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -34,19 +34,23 @@ import java.io.RandomAccessFile;
  **/
 public class AssetDetailPanel extends JPanel {
 	private static AssetDetailPanel instance;
+	private static MediaPlayer player;
 	private boolean inMemoryOnly = false;
+	private JFXPanel VFXPanel = new JFXPanel();
 	private File f;
 	private GraphCode gc;
-	private MediaPlayer player = null;
+
 
 	public AssetDetailPanel(boolean inMemory) {
 		inMemoryOnly = inMemory;
 		instance = this;
+		initJFX();
 		refresh();
 	}
 
 	public AssetDetailPanel() {
 		instance = this;
+		initJFX();
 		refresh();
 	}
 
@@ -54,8 +58,34 @@ public class AssetDetailPanel extends JPanel {
 		return instance;
 	}
 
+	private static void initFX(JFXPanel fxPanel) {
+		// This method is invoked on JavaFX thread
+		//Scene scene = createScene();
+
+
+		StackPane root = new StackPane();
+		Scene scene = new Scene(root);
+//
+		VBox box = new VBox(new Label("A JFXLabel"));
+
+		root.getChildren().add(box);
+		fxPanel.setScene(scene);
+	}
+
+	private void initJFX() {
+		Platform.setImplicitExit(false);
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				initFX(VFXPanel);
+			}
+		});
+
+	}
+
 	public void refresh() {
 		setVisible(false);
+
 		removeAll();
 		setLayout(new GridLayout(2, 1));
 		add(getAssetPanel());
@@ -88,56 +118,17 @@ public class AssetDetailPanel extends JPanel {
 
 				try {
 
-					Platform.setImplicitExit(false);
-					JFXPanel videoPanel = new JFXPanel();
-
-					final JFXPanel VFXPanel = new JFXPanel();
-
-					File video_source = f;
-					String filename = video_source.toURI().toString();
-					System.out.println(filename);
-					javafx.scene.media.Media m = new javafx.scene.media.Media(filename);
-
-					player = new MediaPlayer(m);
-					MediaPlayer player = new MediaPlayer(m);
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							updatePlayer(VFXPanel, f);
+						}
+					});
 
 
-					MediaView viewer = new MediaView(player);
+					p.add(VFXPanel);
 
 
-					StackPane root = new StackPane();
-					Scene scene = new Scene(root);
-
-					MediaControl mediaControl = new MediaControl(player);
-
-					scene.setRoot(mediaControl);
-
-					// add video to stackpane
-					videoPanel.setScene(scene);
-					mediaControl.setMaxHeight(400);
-					mediaControl.setMaxWidth(700);
-
-					// center video position
-					javafx.geometry.Rectangle2D screen = Screen.getPrimary().getVisualBounds();
-					//viewer.setX((screen.getWidth() - p.getWidth()) / 2);
-					//viewer.setY((screen.getHeight() - p.getHeight()) / 2);
-
-//				// resize video based on screen size
-//				DoubleProperty width = viewer.fitWidthProperty();
-//				DoubleProperty height = viewer.fitHeightProperty();
-//				width.bind(Bindings.selectDouble(viewer.sceneProperty(), "width"));
-//				height.bind(Bindings.selectDouble(viewer.sceneProperty(), "height"));
-					viewer.setPreserveRatio(true);
-
-					// add video to stackpane
-					root.getChildren().add(viewer);
-
-					VFXPanel.setScene(scene);
-					//player.play();
-
-					videoPanel.setLayout(new BorderLayout());
-					videoPanel.add(VFXPanel, BorderLayout.CENTER);
-					p.add(videoPanel);
 				} catch (Exception e) {
 					e.printStackTrace();
 					JLabel l = new JLabel("Error on video display");
@@ -182,9 +173,31 @@ public class AssetDetailPanel extends JPanel {
 		return q;
 	}
 
+	private void updatePlayer(JFXPanel fxPanel, File f) {
+
+		String filename = f.toURI().toString();
+
+		javafx.scene.media.Media m = new javafx.scene.media.Media(filename);
+
+
+		player = new MediaPlayer(m);
+
+
+		MediaControl mediaControl = new MediaControl(player);
+
+		mediaControl.mediaView.setFitWidth(fxPanel.getWidth());
+		mediaControl.mediaView.setFitHeight(fxPanel.getHeight());
+
+		Scene scene = new Scene(mediaControl);
+
+		fxPanel.setScene(scene);
+	}
+
 	public GraphCode getGraphCode() {
 		return gc;
 	}
+
+	
 
 	private JPanel getGraphCodePanel() {
 		JPanel p = new JPanel();
@@ -204,7 +217,7 @@ public class AssetDetailPanel extends JPanel {
 			mmfg = MMFGCollection.getInstance().getMMFGForFile(f);
 			this.gc = MMFGCollection.getInstance().getOrGenerateGraphCode(mmfg);
 		}
-		
+
 		JTabbedPane tp = new JTabbedPane();
 		tp.addTab("Similar", new SimilarAssetPanel());
 		tp.addTab("Recommendation", new RecommendedAssetPanel());
