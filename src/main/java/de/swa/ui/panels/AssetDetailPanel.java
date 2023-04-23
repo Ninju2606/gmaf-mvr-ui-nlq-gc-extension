@@ -34,7 +34,6 @@ import java.io.RandomAccessFile;
  **/
 public class AssetDetailPanel extends JPanel {
 	private static AssetDetailPanel instance;
-	private static MediaPlayer player;
 	private boolean inMemoryOnly = false;
 	private JFXPanel VFXPanel = new JFXPanel();
 	private File f;
@@ -180,13 +179,9 @@ public class AssetDetailPanel extends JPanel {
 		javafx.scene.media.Media m = new javafx.scene.media.Media(filename);
 
 
-		player = new MediaPlayer(m);
-
+		MediaPlayer player = new MediaPlayer(m);
 
 		MediaControl mediaControl = new MediaControl(player);
-
-		mediaControl.mediaView.setFitWidth(fxPanel.getWidth());
-		mediaControl.mediaView.setFitHeight(fxPanel.getHeight());
 
 		Scene scene = new Scene(mediaControl);
 
