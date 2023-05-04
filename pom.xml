@@ -147,11 +147,6 @@
             <artifactId>gmaf-service</artifactId>
             <version>1.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>de.patricksteinert</groupId>
-            <artifactId>gmaf-mv-plugins</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <build>
