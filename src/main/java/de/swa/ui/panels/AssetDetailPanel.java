@@ -39,7 +39,6 @@ public class AssetDetailPanel extends JPanel {
 	private File f;
 	private GraphCode gc;
 
-
 	public AssetDetailPanel(boolean inMemory) {
 		inMemoryOnly = inMemory;
 		instance = this;
@@ -171,6 +170,7 @@ public class AssetDetailPanel extends JPanel {
 		q.add(l, "North");
 		return q;
 	}
+
 
 	private void updatePlayer(JFXPanel fxPanel, File f) {
 
