@@ -22,7 +22,6 @@ public class SimilarAssetPanel extends JPanel {
 	}
 	
 	public void refresh() {
-		setVisible(false);
 		removeAll();
 		
 		try {
@@ -41,7 +40,6 @@ public class SimilarAssetPanel extends JPanel {
 		catch (Exception x) {
 			x.printStackTrace();
 		}
-		setVisible(true);
 	}
 	
 	public static SimilarAssetPanel getCurrentInstance() {
