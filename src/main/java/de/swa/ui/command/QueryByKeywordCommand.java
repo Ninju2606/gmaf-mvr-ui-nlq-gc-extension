@@ -45,13 +45,13 @@ public class QueryByKeywordCommand extends AbstractCommand {
 				if (words.size() == 0) vocTerms.add(s.trim());
 				
 				// Synonyms from Wikidata
-				SemWebExtension se = new SemWebExtension();
-				Vector<String> wiki = se.getSynonymNamesForConcept(s);
-				for (String syn : wiki ) {
-					if (!vocTerms.contains(syn)) {
-						vocTerms.add(syn);
-					}
-				}
+//				SemWebExtension se = new SemWebExtension();
+//				Vector<String> wiki = se.getSynonymNamesForConcept(s);
+//				for (String syn : wiki ) {
+//					if (!vocTerms.contains(syn)) {
+//						vocTerms.add(syn);
+//					}
+//				}
 			}
 		}
 
