@@ -50,6 +50,7 @@ public class ProcessCommand extends AbstractCommand implements Runnable {
 			GraphCode gc = GraphCodeGenerator.generate(fv);
 			GraphCodeIO.write(gc, new File(Configuration.getInstance().getGraphCodeRepository() + File.separatorChar + f.getName() + ".gc"));
 			MMFGCollection.getInstance().replaceMMFGInCollection(fv, f);
+
 			
 			LogPanel.getCurrentInstance().addToLog("GraphCode exported to " + Configuration.getInstance().getGraphCodeRepository());
 		}
