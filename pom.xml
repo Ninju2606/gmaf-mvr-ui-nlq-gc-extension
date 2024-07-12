@@ -21,6 +21,14 @@
         <jfx.version>20-ea+11</jfx.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/marquies/gmaf-mvr</url>
+        </repository>
+    </repositories>
+
+
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -116,7 +124,6 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx</artifactId>
             <version>${jfx.version}</version>
-            
             <type>pom</type>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-swing -->
@@ -141,12 +148,24 @@
             <artifactId>gmaf-semantics</artifactId>
             <version>1.0.0</version>
         </dependency>
-<!--
+
         <dependency>
             <groupId>de.swa</groupId>
             <artifactId>gmaf-ext-plugins</artifactId>
             <version>1.0.0</version>
-        </dependency>-->
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>de.swa</groupId>-->
+<!--            <artifactId>gmaf-core-plugins</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>de.swa</groupId>-->
+<!--            <artifactId>gmaf-ext-plugins</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>de.swa</groupId>
