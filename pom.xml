@@ -21,6 +21,14 @@
         <jfx.version>20-ea+11</jfx.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/marquies/gmaf-mvr</url>
+        </repository>
+    </repositories>
+
+
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -28,17 +36,6 @@
             <version>3.4</version>
         </dependency>
 
-        <dependency>
-            <groupId>de.swa</groupId>
-            <artifactId>gmaf-api</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>de.swa</groupId>
-            <artifactId>gmaf-core-plugins</artifactId>
-            <version>1.0.0</version>
-        </dependency>
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
@@ -138,19 +135,33 @@
 
         <dependency>
             <groupId>de.swa</groupId>
-            <artifactId>gmaf-semantics</artifactId>
+            <artifactId>gmaf-semantics-mvr</artifactId>
             <version>1.0.0</version>
         </dependency>
-<!--
-        <dependency>
-            <groupId>de.swa</groupId>
-            <artifactId>gmaf-ext-plugins</artifactId>
-            <version>1.0.0</version>
-        </dependency>-->
+
 
         <dependency>
             <groupId>de.swa</groupId>
-            <artifactId>gmaf-service</artifactId>
+            <artifactId>gmaf-api-mvr</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+
+<!--        <dependency>-->
+<!--            <groupId>de.swa</groupId>-->
+<!--            <artifactId>gmaf-core-plugins</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>de.swa</groupId>-->
+<!--            <artifactId>gmaf-ext-plugins</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>de.swa</groupId>
+            <artifactId>gmaf-service-mvr</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
