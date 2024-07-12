@@ -129,14 +129,14 @@
 
         <dependency>
             <groupId>de.swa</groupId>
-            <artifactId>gmaf-semantics</artifactId>
+            <artifactId>gmaf-semantics-mvr</artifactId>
             <version>1.0.0</version>
         </dependency>
 
 
         <dependency>
             <groupId>de.swa</groupId>
-            <artifactId>gmaf-api</artifactId>
+            <artifactId>gmaf-api-mvr</artifactId>
             <version>1.0.1</version>
         </dependency>
 
@@ -154,7 +154,7 @@
 
         <dependency>
             <groupId>de.swa</groupId>
-            <artifactId>gmaf-service</artifactId>
+            <artifactId>gmaf-service-mvr</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
