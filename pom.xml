@@ -12,7 +12,20 @@
     <name>GMAF Swing UI</name>
     <description></description>
 
-
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/marquies/gmaf-mvr</url>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub marquies Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/marquies/gmaf-mvr</url>
+        </repository>
+    </distributionManagement>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>14</maven.compiler.source>
