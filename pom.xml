@@ -6,7 +6,7 @@
 
     <groupId>de.swa</groupId>
     <artifactId>gmaf-ui</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>GMAF Swing UI</name>
@@ -135,7 +135,7 @@
         <dependency>
             <groupId>de.swa</groupId>
             <artifactId>gmaf-semantics-mvr</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
 
 
@@ -160,7 +160,7 @@
         <dependency>
             <groupId>de.swa</groupId>
             <artifactId>gmaf-service-mvr</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>de.swa</groupId>
