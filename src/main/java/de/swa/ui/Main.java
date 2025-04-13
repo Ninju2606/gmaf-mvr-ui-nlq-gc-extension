@@ -18,7 +18,7 @@ public class Main {
 	
 	public Main() {
 		if (Configuration.getInstance().launchServer()) {
-			Service.start();
+			new Service().start();
 		}
 		
 		FlatLightLaf.install();

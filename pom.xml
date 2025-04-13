@@ -23,7 +23,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>14</maven.compiler.source>
         <maven.compiler.target>14</maven.compiler.target>
-        <cxf.version>3.5.11</cxf.version>
+        <cxf.version>4.0.7</cxf.version>
 <!--        <jfx.version>20-ea+21</jfx.version>-->
         <jfx.version>21</jfx.version>
 
@@ -103,18 +103,12 @@
         <dependency>
             <groupId>jakarta.jws</groupId>
             <artifactId>jakarta.jws-api</artifactId>
-            <version>1.1.1</version>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-core</artifactId>
             <version>2.3.0.1</version>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.eclipse.angus</groupId>-->
-<!--                    <artifactId>angus-activation</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
         </dependency>
 
         <dependency>
@@ -174,13 +168,13 @@
         <dependency>
             <groupId>de.swa</groupId>
             <artifactId>gmaf-ext-plugins-mvr</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>de.swa</groupId>
             <artifactId>gmaf-service-mvr</artifactId>
-            <version>1.0.5-SNAPSHOT</version>
+            <version>1.0.6-SNAPSHOT</version>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>de.swa</groupId>-->
