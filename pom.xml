@@ -165,11 +165,11 @@
 <!--            <version>1.0.0</version>-->
 <!--        </dependency>-->
 
-        <dependency>
-            <groupId>de.swa</groupId>
-            <artifactId>gmaf-ext-plugins-mvr</artifactId>
-            <version>1.0.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>de.swa</groupId>-->
+<!--            <artifactId>gmaf-ext-plugins-mvr</artifactId>-->
+<!--            <version>1.0.1</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>de.swa</groupId>
