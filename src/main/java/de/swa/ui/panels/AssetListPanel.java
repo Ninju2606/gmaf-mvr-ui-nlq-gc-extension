@@ -47,7 +47,7 @@ public class AssetListPanel extends JPanel implements RefreshListener {
 		Vector<MMFG> collection = MMFGCollection.getInstance().getCollection();
 		for (MMFG m : collection) {
 			float[] sim = m.getTempSimilarity();
-			if (sim[0] == 0.0f && sim[1] == 0.0f && sim[1] == 0.0f && MMFGCollection.isQuery) {
+			if (sim != null && sim[0] == 0.0f && sim[1] == 0.0f && sim[2] == 0.0f && MMFGCollection.isQuery) {
 				MMFGPanel mp = new MMFGPanel(m, false, false);
 				result.add(mp);
 			}
