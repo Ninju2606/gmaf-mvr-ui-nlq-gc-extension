@@ -2,12 +2,6 @@
 
 This quickstarts run in a Java standalone container using the fat-jar style.
 
-This example is implemented using very simple Java code.
-The source code is provided in the following java file `src/main/java/io/fabric8/quickstarts/java/simple/fatjar/Main.java`,
-which can be viewed from [github](https://github.com/fabric8io/ipaas-quickstarts/blob/master/quickstart/java/simple-fatjar/src/main/java/io/fabric8/quickstarts/java/simple/fatjar/Main.java).
-
-This example is printing *Hello Fabric8! Here's your random string: lRaNR* to the standard output in the infinite loop.
-
 
 ### Building
 
@@ -25,14 +19,14 @@ The example can be run locally using the following Maven goal:
 
 ### Running the example as jar
 
-   mvn package
-   java -jar target/gmaf-mvr-ui-x.y.z.jar
+    mvn package
+    java -jar target/gmaf-mvr-ui-x.y.z-executable.jar
 
                               
 ## Usage
 
-Use conf/gmaf.config for configuration, e.g. collection path.
-The password is also configured in conf/gmaf.config as API-Key - default is 'letmein'.
+- Use conf/gmaf.config for configuration, e.g. collection path.
+- The password is also configured in conf/gmaf.config as API-Key - default is 'letmein'.
 
 ### More details
 
