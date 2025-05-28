@@ -23,10 +23,16 @@ The example can be run locally using the following Maven goal:
     mvn exec:java
 
 
-### Running the example in fabric8
+### Running the example as jar
 
    mvn package
    java -jar target/gmaf-mvr-ui-x.y.z.jar
+
+                              
+## Usage
+
+Use conf/gmaf.config for configuration, e.g. collection path.
+The password is also configured in conf/gmaf.config as API-Key - default is 'letmein'.
 
 ### More details
 
