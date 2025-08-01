@@ -35,12 +35,18 @@ public class NlqGcService {
 
     public CompletableFuture<GraphCodeDTO> startChecking() {
         if (StringUtils.isEmpty(transactionId)) {
-            return null;
+            return resultFuture;
         }
+
+        final long timeout = System.currentTimeMillis() + 120000; // 2 minutes
 
         final Runnable checker = () -> {
             GraphCodeDTO gc = checkTransactionStatus();
-            if (gc != null && gc.getState() != State.PENDING) {
+            if (System.currentTimeMillis() > timeout) {
+                // If GC still pending after timeout, abort
+                gc = (gc == null || gc.getState() == State.PENDING) ? null : gc;
+            }
+            if (gc == null || gc.getState() != State.PENDING) {
                 resultFuture.complete(gc);
                 scheduler.shutdown();
             }
